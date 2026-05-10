@@ -72,6 +72,8 @@ function Card({ card, index }: { card: typeof CARDS[0]; index: number }) {
           display: "flex",
           flexDirection: "column",
           gap: "1.25rem",
+          overflow: "hidden",
+          maxWidth: "100%",
         }}
       >
         {/* Top row */}
@@ -118,50 +120,71 @@ function Card({ card, index }: { card: typeof CARDS[0]; index: number }) {
           {card.description}
         </p>
 
-        {/* Images */}
-        {(() => {
-          const hasAllImages = card.images.filter(Boolean).length === 3;
-          const hasSomeImages = card.images.filter(Boolean).length > 0;
-
-          if (hasAllImages) {
-            return (
-              <div className="flex gap-3 max-[640px]:flex-col" style={{ height: "clamp(280px, 35vw, 460px)" }}>
-                {/* Left col */}
-                <div className="flex flex-col gap-3 max-[640px]:w-full" style={{ width: "40%" }}>
-                  <div className="h-48 max-[640px]:h-[200px]" style={{ borderRadius: "20px", overflow: "hidden" }}>
-                    {card.images[0]
-                      ? <img src={card.images[0]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-                      : <Placeholder label={card.name} />}
-                  </div>
-                  <div className="h-48 max-[640px]:h-[200px]" style={{ borderRadius: "20px", overflow: "hidden" }}>
-                    {card.images[1]
-                      ? <img src={card.images[1]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-                      : <Placeholder label={card.name} />}
-                  </div>
+        {/* Image section */}
+        <div style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "10px",
+          marginTop: "8px",
+        }}>
+          {card.images.filter(Boolean).length === 3 ? (
+            <>
+              {/* Left column - 2 stacked images */}
+              <div style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
+                flex: "0 0 38%",
+                minWidth: "140px",
+              }}>
+                <div style={{
+                  height: "clamp(120px, 14vw, 200px)",
+                  borderRadius: "16px",
+                  overflow: "hidden",
+                  flexShrink: 0,
+                }}>
+                  <img src={card.images[0]!} alt=""
+                    style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
                 </div>
-                {/* Right col */}
-                <div className="max-[640px]:w-full max-[640px]:h-[240px]" style={{ flex: 1, borderRadius: "20px", overflow: "hidden" }}>
-                  {card.images[2]
-                    ? <img src={card.images[2]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-                    : <Placeholder label={card.name} />}
+                <div style={{
+                  height: "clamp(140px, 18vw, 260px)",
+                  borderRadius: "16px",
+                  overflow: "hidden",
+                  flexShrink: 0,
+                }}>
+                  <img src={card.images[1]!} alt=""
+                    style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
                 </div>
               </div>
-            );
-          }
-
-          if (!hasAllImages && hasSomeImages) {
-            const firstImage = card.images.find(Boolean);
-            return (
-              <div style={{ borderRadius: "20px", overflow: "hidden", height: "clamp(300px, 40vw, 480px)", width: "100%" }}>
-                {firstImage
-                  ? <img src={firstImage} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-                  : <Placeholder label={card.name} />}
+              {/* Right column - 1 tall image */}
+              <div style={{
+                flex: "1 1 55%",
+                minWidth: "140px",
+                height: "clamp(270px, 34vw, 480px)",
+                borderRadius: "16px",
+                overflow: "hidden",
+              }}>
+                <img src={card.images[2]!} alt=""
+                  style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
               </div>
-            );
-          }
-
-          return null;
-        })()}
+            </>
+          ) : (
+            <>
+              {/* Single image full width */}
+              {card.images[0] && (
+                <div style={{
+                  width: "100%",
+                  height: "clamp(180px, 28vw, 380px)",
+                  borderRadius: "16px",
+                  overflow: "hidden",
+                }}>
+                  <img src={card.images[0]} alt=""
+                    style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
+                </div>
+              )}
+            </>
+          )}
+        </div>
       </motion.div>
     </div>
   );

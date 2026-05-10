@@ -26,23 +26,23 @@ export default function Hero() {
       const h = canvas.height;
       ctx.clearRect(0, 0, w, h);
 
-      const g = ctx.createRadialGradient(w/2,h/2,0,w/2,h/2,h*0.42);
+      const g = ctx.createRadialGradient(w/2,h/2,0,w/2,h/2,h*0.48);
       g.addColorStop(0,"rgba(240,180,41,0.13)");
       g.addColorStop(0.6,"rgba(182,0,168,0.07)");
       g.addColorStop(1,"rgba(0,0,0,0)");
       ctx.beginPath();
-      ctx.arc(w/2,h/2,h*0.42,0,Math.PI*2);
+      ctx.arc(w/2,h/2,h*0.48,0,Math.PI*2);
       ctx.fillStyle=g; ctx.fill();
 
       ctx.save();
       ctx.translate(w/2,h/2);
       ctx.rotate(t*0.25);
       ctx.beginPath();
-      ctx.ellipse(0,0,h*0.28,h*0.16,0,0,Math.PI*2);
+      ctx.ellipse(0,0,h*0.35,h*0.16,0,0,Math.PI*2);
       ctx.strokeStyle="rgba(240,180,41,0.18)";
       ctx.lineWidth=1; ctx.stroke();
       ctx.beginPath();
-      ctx.arc(h*0.28,0,5,0,Math.PI*2);
+      ctx.arc(h*0.35,0,5,0,Math.PI*2);
       ctx.fillStyle="rgba(240,180,41,1)"; ctx.fill();
       ctx.restore();
 
@@ -50,15 +50,15 @@ export default function Hero() {
       ctx.translate(w/2,h/2);
       ctx.rotate(-t*0.18);
       ctx.beginPath();
-      ctx.ellipse(0,0,h*0.18,h*0.24,0.6,0,Math.PI*2);
+      ctx.ellipse(0,0,h*0.22,h*0.24,0.6,0,Math.PI*2);
       ctx.strokeStyle="rgba(182,0,168,0.14)";
       ctx.lineWidth=1; ctx.stroke();
       ctx.beginPath();
-      ctx.arc(h*0.18,0,3,0,Math.PI*2);
+      ctx.arc(h*0.22,0,3,0,Math.PI*2);
       ctx.fillStyle="rgba(182,0,168,0.9)"; ctx.fill();
       ctx.restore();
 
-      const bars=36, maxBarH=h*0.18, totalW=h*0.42;
+      const bars=42, maxBarH=h*0.22, totalW=h*0.52;
       const gap=totalW/bars, sx=w/2-totalW/2;
       for(let i=0;i<bars;i++){
         const x=sx+i*gap;
@@ -138,8 +138,8 @@ export default function Hero() {
         pointerEvents: "none",
       }}>
         <canvas ref={canvasRef} style={{
-          width: "min(260px, 70vw)",
-          height: "min(260px, 70vw)",
+          width: "clamp(320px, 75vw, 600px)",
+          height: "clamp(320px, 75vw, 600px)",
         }}/>
       </div>
 
