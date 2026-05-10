@@ -43,19 +43,6 @@ function Card({ card, index }: { card: typeof CARDS[0]; index: number }) {
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1 - (CARDS.length - 1 - index) * 0.03]);
 
-  const Placeholder = ({ label }: { label: string }) => (
-    <div style={{
-      width: "100%", height: "100%",
-      backgroundColor: "#1a1a1a",
-      borderRadius: "20px",
-      display: "flex", alignItems: "center", justifyContent: "center",
-    }}>
-      <span style={{ color: "#f0b429", fontWeight: 900, fontSize: "1rem", textTransform: "uppercase", letterSpacing: "0.1em", fontFamily: "var(--font-kanit), Kanit, sans-serif" }}>
-        {label}
-      </span>
-    </div>
-  );
-
   return (
     <div ref={ref} style={{ height: "90vh", position: "relative" }}>
       <motion.div
