@@ -13,8 +13,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Website Clone",
-  description: "Pixel-perfect website clone",
+  title: "Larynx AI — Stop Losing COD Orders & Abandoned Carts to RTO",
+  description:
+    "AI voice + WhatsApp automation that recovers revenue you're already losing to RTO and abandoned carts. ₹10,000 free credits to start, no card. Money-back if it doesn't pay for itself.",
+};
+
+export const viewport = {
+  themeColor: "#0b0b0c",
 };
 
 export default function RootLayout({
@@ -25,7 +30,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} dark h-full`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
